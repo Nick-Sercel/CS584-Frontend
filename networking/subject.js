@@ -1,7 +1,7 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export async function getSubjects() {
-  const response = await fetch(`${BASE_URL}/Subjects/Index`, {
+  const response = await fetch(`Subjects/Index`, {
     method: "GET",
   });
   if (!response.ok) {
@@ -11,7 +11,7 @@ export async function getSubjects() {
 }
 
 export async function getSubjectDetails(id) {
-  const subjectDetailsRes = await fetch(`${BASE_URL}/Subjects/Details/${id}`, {
+  const subjectDetailsRes = await fetch(`Subjects/Details/${id}`, {
     method: "GET",
   });
   if (!subjectDetailsRes.ok) {
@@ -22,7 +22,7 @@ export async function getSubjectDetails(id) {
 }
 
 export async function editSubject(id, subject) {
-  const url = `${BASE_URL}/Subjects/Edit/${id}`;
+  const url = `Subjects/Edit/${id}`;
 
   const requestData = {
     Id: id,
@@ -52,7 +52,7 @@ export async function editSubject(id, subject) {
 }
 
 export async function createSubject(subject) {
-  const url = `${BASE_URL}/Subjects/Create`;
+  const url = `Subjects/Create`;
 
   console.log("subject", subject);
   try {
@@ -78,7 +78,7 @@ export async function createSubject(subject) {
 }
 
 export async function deleteSubject(id) {
-  const response = await fetch(`${BASE_URL}/Subjects/Delete/${id}`, {
+  const response = await fetch(`Subjects/Delete/${id}`, {
     method: "POST",
   });
   if (!response.ok) {

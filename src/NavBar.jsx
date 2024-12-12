@@ -7,11 +7,7 @@ export const Navbar = ({ loggedIn, setLoggedIn }) => {
       <div style={{ width: "100%", height: "5rem" }}></div>
       <Nav
         style={{
-          position: "fixed",
           height: "4rem",
-          top: "0",
-          width: "100%",
-          left: "0",
         }}
       >
         <Bars />

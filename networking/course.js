@@ -5,7 +5,7 @@ import { getTeachers } from "./teacher";
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export async function getCourses() {
-  const response = await fetch(`${BASE_URL}/Courses/Index`, {
+  const response = await fetch(`Courses/Index`, {
     method: "GET",
   });
   if (!response.ok) {
@@ -41,7 +41,7 @@ export async function getCreateCourse() {
 }
 
 export async function getCourseDetails(id) {
-  const courseDetailsRes = await fetch(`${BASE_URL}/Courses/Details/${id}`, {
+  const courseDetailsRes = await fetch(`Courses/Details/${id}`, {
     method: "GET",
   });
   if (!courseDetailsRes.ok) {
@@ -52,7 +52,7 @@ export async function getCourseDetails(id) {
 }
 
 export async function editCourse(id, course, selectedStudents) {
-  const url = `${BASE_URL}/Courses/Edit/${id}`;
+  const url = `Courses/Edit/${id}`;
 
   const requestData = {
     Id: id,
@@ -83,7 +83,7 @@ export async function editCourse(id, course, selectedStudents) {
 }
 
 export async function createCourse(course, selectedStudents) {
-  const url = `${BASE_URL}/Courses/Create`;
+  const url = `Courses/Create`;
 
   console.log("course", course);
 
@@ -117,7 +117,7 @@ export async function createCourse(course, selectedStudents) {
 }
 
 export async function deleteCourse(id) {
-  const response = await fetch(`${BASE_URL}/Courses/Delete/${id}`, {
+  const response = await fetch(`Courses/Delete/${id}`, {
     method: "POST",
   });
   if (!response.ok) {

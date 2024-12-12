@@ -3,7 +3,7 @@ import { getCourses } from "./course";
 import { getSubjects } from "./subject";
 
 export async function getTeachers() {
-  const response = await fetch(`${BASE_URL}/Teachers/Index`, {
+  const response = await fetch(`Teachers/Index`, {
     method: "GET",
   });
   if (!response.ok) {
@@ -35,7 +35,7 @@ export async function getCreateTeacher() {
 }
 
 export async function getTeacherDetails(id) {
-  const teacherDetailsRes = await fetch(`${BASE_URL}/Teachers/Details/${id}`, {
+  const teacherDetailsRes = await fetch(`Teachers/Details/${id}`, {
     method: "GET",
   });
   if (!teacherDetailsRes.ok) {
@@ -46,7 +46,7 @@ export async function getTeacherDetails(id) {
 }
 
 export async function editTeacher(id, teacher, selectedCourses) {
-  const url = `${BASE_URL}/Teachers/Edit/${id}`;
+  const url = `Teachers/Edit/${id}`;
 
   const requestData = {
     Id: id,
@@ -77,7 +77,7 @@ export async function editTeacher(id, teacher, selectedCourses) {
 }
 
 export async function createTeacher(teacher, selectedCourses) {
-  const url = `${BASE_URL}/Teachers/Create`;
+  const url = `Teachers/Create`;
 
   console.log("teacher", teacher);
 
@@ -111,7 +111,7 @@ export async function createTeacher(teacher, selectedCourses) {
 }
 
 export async function deleteTeacher(id) {
-  const response = await fetch(`${BASE_URL}/Teachers/Delete/${id}`, {
+  const response = await fetch(`Teachers/Delete/${id}`, {
     method: "POST",
   });
   if (!response.ok) {
