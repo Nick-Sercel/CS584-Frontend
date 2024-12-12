@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { deleteCourse, getCourses } from "../../networking/course";
 
-export const CoursesIndex = () => {
+export const CoursesIndex = ({ loggedIn }) => {
   const [courses, setCourses] = useState();
   const navigate = useNavigate();
 
   const removeCourse = async (id) => {
+    if (!loggedIn) {
+      navigate("/login");
+      return;
+    }
     const res = await deleteCourse(id);
     if (res.success) {
       const d = await getCourses();
@@ -38,6 +42,7 @@ export const CoursesIndex = () => {
           <tr>
             <th>Name</th>
             <th>Description</th>
+            <th>Subject</th>
             <th>Teacher</th>
           </tr>
         </thead>
@@ -48,6 +53,7 @@ export const CoursesIndex = () => {
                 <tr style={{ gap: "1rem" }} key={course.id + "value"}>
                   <td>{course.name}</td>
                   <td>{course.description}</td>
+                  <td>{course.subject.name}</td>
                   <td>{course.teacher.name}</td>
                   <td
                     style={{
@@ -56,7 +62,10 @@ export const CoursesIndex = () => {
                       textDecoration: "underline",
                     }}
                   >
-                    <a onClick={() => navigate(`/courses/edit/${course.id}`)}>
+                    <a
+                      style={{ cursor: "pointer", textDecoration: "underline" }}
+                      onClick={() => navigate(`/courses/edit/${course.id}`)}
+                    >
                       Edit
                     </a>
                   </td>
@@ -70,7 +79,10 @@ export const CoursesIndex = () => {
                   </td>
                   <td>
                     <a
-                      style={{ cursor: "pointer", textDecoration: "underline" }}
+                      style={{
+                        cursor: "pointer",
+                        textDecoration: "underline",
+                      }}
                       onClick={(e) => {
                         e.preventDefault();
                         removeCourse(course.id);

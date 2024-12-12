@@ -2,11 +2,15 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { deleteTeacher, getTeachers } from "../../networking/teacher";
 
-export const TeachersIndex = () => {
+export const TeachersIndex = ({ loggedIn }) => {
   const [teachers, setTeachers] = useState();
   const navigate = useNavigate();
 
   const removeTeacher = async (id) => {
+    if (!loggedIn) {
+      navigate("/login");
+      return;
+    }
     const res = await deleteTeacher(id);
     if (res.success) {
       const d = await getTeachers();
@@ -50,10 +54,22 @@ export const TeachersIndex = () => {
                   <td>{teacher.email}</td>
                   <td>{teacher.field.name}</td>
                   <td style={{ paddingLeft: "3rem" }}>
-                    <a href={`/teachers/edit/${teacher.id}`}>Edit</a>
+                    <a
+                      style={{ cursor: "pointer", textDecoration: "underline" }}
+                      onClick={() => navigate(`/teachers/edit/${teacher.id}`)}
+                    >
+                      Edit
+                    </a>
                   </td>
                   <td>
-                    <a href={`/teachers/details/${teacher.id}`}>Details</a>
+                    <a
+                      style={{ cursor: "pointer", textDecoration: "underline" }}
+                      onClick={() =>
+                        navigate(`/teachers/details/${teacher.id}`)
+                      }
+                    >
+                      Details
+                    </a>
                   </td>
                   <td>
                     <a

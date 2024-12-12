@@ -1,7 +1,7 @@
 import React from "react";
 import { Bars, Nav, NavBtn, NavBtnLink, NavLink, NavMenu } from "./NavStyles";
 
-export const Navbar = () => {
+export const Navbar = ({ loggedIn, setLoggedIn }) => {
   return (
     <>
       <div style={{ width: "100%", height: "5rem" }}></div>
@@ -24,8 +24,23 @@ export const Navbar = () => {
           <NavLink to="/subjects">Subjects</NavLink>
         </NavMenu>
         <NavBtn>
-          <NavBtnLink to="/sign-up">Sign Up</NavBtnLink>
-          <NavBtnLink to="/signin">Sign In</NavBtnLink>
+          {loggedIn ? (
+            <>
+              <p>{loggedIn}</p>
+              <NavBtnLink
+                onClick={() => {
+                  setLoggedIn(false);
+                }}
+              >
+                Logout
+              </NavBtnLink>
+            </>
+          ) : (
+            <>
+              <NavBtnLink to="/signup">Sign Up</NavBtnLink>
+              <NavBtnLink to="/login">Log In</NavBtnLink>
+            </>
+          )}
         </NavBtn>
       </Nav>
     </>

@@ -29,6 +29,10 @@ export const DetailsCourse = () => {
             <p>{course.description}</p>
           </div>
           <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
+            <p>Subject</p>
+            <p>{course.subject.name}</p>
+          </div>
+          <div style={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
             <p>Teacher</p>
             <p>{course.teacher.name}</p>
           </div>

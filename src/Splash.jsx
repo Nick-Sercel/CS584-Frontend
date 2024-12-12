@@ -1,7 +1,7 @@
 export const Splash = () => {
   return (
     <div>
-      <h1 class="display-4 text-center">Welcome</h1>
+      <h1>Welcome</h1>
       <h2>This app is a representation of a school</h2>
       <p>The following are the models used</p>
       <ul>

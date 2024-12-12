@@ -1,3 +1,4 @@
+import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Navbar } from "./NavBar";
@@ -23,37 +24,132 @@ import { DetailsCourse } from "./Course/Details";
 import { EditCourse } from "./Course/Edit";
 import { CoursesIndex } from "./Course/Index";
 
+import { useState } from "react";
+import { ProtectedRoute } from "./ProtectedRoute";
+import { Login, Signup } from "./signup";
+
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <div>
       <BrowserRouter>
-        <Navbar />
+        <Navbar loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Routes>
           <Route path="/" element={<Splash />} />
           <Route path="/courses">
-            <Route index element={<CoursesIndex />} />
-            <Route path="edit/:id" element={<EditCourse />} />
-            <Route path="details/:id" element={<DetailsCourse />} />
-            <Route path="create" element={<CreateCourse />} />
+            <Route index element={<CoursesIndex loggedIn={loggedIn} />} />
+            <Route
+              path="edit/:id"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <EditCourse />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="details/:id"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <DetailsCourse />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="create"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <CreateCourse />
+                </ProtectedRoute>
+              }
+            />
           </Route>
           <Route path="/teachers">
-            <Route index element={<TeachersIndex />} />
-            <Route path="edit/:id" element={<EditTeacher />} />
-            <Route path="details/:id" element={<DetailsTeacher />} />
-            <Route path="create" element={<CreateTeacher />} />
+            <Route index element={<TeachersIndex loggedIn={loggedIn} />} />
+            <Route
+              path="edit/:id"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <EditTeacher />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="details/:id"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <DetailsTeacher />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="create"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <CreateTeacher />
+                </ProtectedRoute>
+              }
+            />
           </Route>
           <Route path="/students">
-            <Route index element={<StudentsIndex />} />
-            <Route path="edit/:id" element={<EditStudent />} />
-            <Route path="details/:id" element={<DetailsStudent />} />
-            <Route path="create" element={<CreateStudent />} />
+            <Route index element={<StudentsIndex loggedIn={loggedIn} />} />
+            <Route
+              path="edit/:id"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <EditStudent />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="details/:id"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <DetailsStudent />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="create"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <CreateStudent />
+                </ProtectedRoute>
+              }
+            />
           </Route>
           <Route path="/subjects">
-            <Route index element={<SubjectsIndex />} />
-            <Route path="edit/:id" element={<EditSubject />} />
-            <Route path="details/:id" element={<DetailsSubject />} />
-            <Route path="create" element={<CreateSubject />} />
+            <Route index element={<SubjectsIndex loggedIn={loggedIn} />} />
+            <Route
+              path="edit/:id"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <EditSubject />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="details/:id"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <DetailsSubject />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="create"
+              element={
+                <ProtectedRoute loggedIn={loggedIn}>
+                  <CreateSubject />
+                </ProtectedRoute>
+              }
+            />
           </Route>
+          <Route path="/login" element={<Login setLoggedIn={setLoggedIn} />} />
+          <Route
+            path="/signup"
+            element={<Signup setLoggedIn={setLoggedIn} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

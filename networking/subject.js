@@ -21,13 +21,12 @@ export async function getSubjectDetails(id) {
   return subjectDetailsRes.json();
 }
 
-export async function editSubject(id, subject, selectedCourses) {
+export async function editSubject(id, subject) {
   const url = `${BASE_URL}/Subjects/Edit/${id}`;
 
   const requestData = {
     Id: id,
     ...subject,
-    SelectedCourseIds: selectedCourses,
   };
 
   try {
