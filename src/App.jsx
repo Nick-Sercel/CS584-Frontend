@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Navbar } from "./NavBar";
@@ -28,8 +28,18 @@ import { useState } from "react";
 import { ProtectedRoute } from "./ProtectedRoute";
 import { Login, Signup } from "./signup";
 
+import { loginWithSessionToken } from "./encryption";
+
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const log = async () => {
+      const state = await loginWithSessionToken();
+      setLoggedIn(state);
+    };
+    log();
+  });
 
   return (
     <div>

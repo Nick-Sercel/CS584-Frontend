@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { createAccount, verifyLogin } from "../networking/auth";
+import { setLoginSession } from "./encryption";
 
 export const Signup = ({ setLoggedIn }) => {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ export const Signup = ({ setLoggedIn }) => {
     const password = document.getElementById("password").value;
     const res = await createAccount(username, password);
     if (res.success === true) {
+      setLoginSession(username, password);
       setLoggedIn(username);
       navigate("/subjects");
     } else {
@@ -26,7 +28,7 @@ export const Signup = ({ setLoggedIn }) => {
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <input id="password"></input>
+          <input id="password" type="password"></input>
         </div>
         <input
           type="submit"
@@ -48,6 +50,7 @@ export const Login = ({ setLoggedIn }) => {
     const password = document.getElementById("password").value;
     const res = await verifyLogin(username, password);
     if (res.success === true) {
+      setLoginSession(username, password);
       setLoggedIn(username);
       navigate("/");
     } else {
@@ -65,7 +68,7 @@ export const Login = ({ setLoggedIn }) => {
         </div>
         <div>
           <label htmlFor="password">Password</label>
-          <input id="password"></input>
+          <input id="password" type="password"></input>
         </div>
         <input
           type="submit"
