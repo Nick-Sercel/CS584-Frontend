@@ -1,6 +1,6 @@
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-import { getCourses } from "./courses";
-import { getSubjects } from "./subjects";
+import { getCourses } from "./course";
+import { getSubjects } from "./subject";
 
 export async function getStudents() {
   const response = await fetch(`${BASE_URL}/Students/Index`, {

@@ -1,9 +1,11 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-import { getCourses } from "./course";
+import { getStudents } from "./student";
 import { getSubjects } from "./subject";
+import { getTeachers } from "./teacher";
 
-export async function getTeachers() {
-  const response = await fetch(`${BASE_URL}/Teachers/Index`, {
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
+export async function getCourses() {
+  const response = await fetch(`${BASE_URL}/Courses/Index`, {
     method: "GET",
   });
   if (!response.ok) {
@@ -12,46 +14,50 @@ export async function getTeachers() {
   return response.json();
 }
 
-export async function getEditTeacher(id) {
-  const teacher = await getTeacherDetails(id);
+export async function getEditCourse(id) {
+  const course = await getCourseDetails(id);
   const subjects = await getSubjects();
-  const courses = await getCourses();
+  const teachers = await getTeachers();
+  const students = await getStudents();
 
   return {
-    teacher,
+    course,
     subjects,
-    courses,
+    teachers,
+    students,
   };
 }
 
-export async function getCreateTeacher() {
+export async function getCreateCourse() {
   const subjects = await getSubjects();
-  const courses = await getCourses();
+  const teachers = await getTeachers();
+  const students = await getStudents();
 
   return {
     subjects,
-    courses,
+    teachers,
+    students,
   };
 }
 
-export async function getTeacherDetails(id) {
-  const teacherDetailsRes = await fetch(`${BASE_URL}/Teachers/Details/${id}`, {
+export async function getCourseDetails(id) {
+  const courseDetailsRes = await fetch(`${BASE_URL}/Courses/Details/${id}`, {
     method: "GET",
   });
-  if (!teacherDetailsRes.ok) {
+  if (!courseDetailsRes.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  return teacherDetailsRes.json();
+  return courseDetailsRes.json();
 }
 
-export async function editTeacher(id, teacher, selectedCourses) {
-  const url = `${BASE_URL}/Teachers/Edit/${id}`;
+export async function editCourse(id, course, selectedStudents) {
+  const url = `${BASE_URL}/Courses/Edit/${id}`;
 
   const requestData = {
     Id: id,
-    ...teacher,
-    SelectedCourseIds: selectedCourses,
+    ...course,
+    SelectedStudentIds: selectedStudents,
   };
 
   try {
@@ -76,14 +82,14 @@ export async function editTeacher(id, teacher, selectedCourses) {
   }
 }
 
-export async function createTeacher(teacher, selectedCourses) {
-  const url = `${BASE_URL}/Teachers/Create`;
+export async function createCourse(course, selectedStudents) {
+  const url = `${BASE_URL}/Courses/Create`;
 
-  console.log("teacher", teacher);
+  console.log("course", course);
 
   const requestData = {
-    ...teacher,
-    SelectedCourseIds: selectedCourses,
+    ...course,
+    SelectedStudentIds: selectedStudents,
   };
 
   console.log(requestData);
@@ -110,8 +116,8 @@ export async function createTeacher(teacher, selectedCourses) {
   }
 }
 
-export async function deleteTeacher(id) {
-  const response = await fetch(`${BASE_URL}/Teachers/Delete/${id}`, {
+export async function deleteCourse(id) {
+  const response = await fetch(`${BASE_URL}/Courses/Delete/${id}`, {
     method: "POST",
   });
   if (!response.ok) {
