@@ -25,6 +25,8 @@ export const Navbar = ({ loggedIn, setLoggedIn }) => {
               <p>{loggedIn}</p>
               <NavBtnLink
                 onClick={() => {
+                  sessionStorage.removeItem("sessionToken");
+                  console.log("Destroyed session");
                   setLoggedIn(false);
                 }}
               >

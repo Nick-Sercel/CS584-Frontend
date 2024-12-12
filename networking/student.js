@@ -1,9 +1,9 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const BASE_URL = import.meta.env.VITE_SERVER_URL;
 import { getCourses } from "./course";
 import { getSubjects } from "./subject";
 
 export async function getStudents() {
-  const response = await fetch(`Students/Index`, {
+  const response = await fetch(`${BASE_URL}/Students/Index`, {
     method: "GET",
   });
   if (!response.ok) {
@@ -35,7 +35,7 @@ export async function getCreateStudent() {
 }
 
 export async function getStudentDetails(id) {
-  const studentDetailsRes = await fetch(`Students/Details/${id}`, {
+  const studentDetailsRes = await fetch(`${BASE_URL}/Students/Details/${id}`, {
     method: "GET",
   });
   if (!studentDetailsRes.ok) {
@@ -46,7 +46,7 @@ export async function getStudentDetails(id) {
 }
 
 export async function editStudent(id, student, selectedCourses) {
-  const url = `Students/Edit/${id}`;
+  const url = `${BASE_URL}/Students/Edit/${id}`;
 
   const requestData = {
     Id: id,
@@ -77,7 +77,7 @@ export async function editStudent(id, student, selectedCourses) {
 }
 
 export async function createStudent(student, selectedCourses) {
-  const url = `Students/Create`;
+  const url = `${BASE_URL}/Students/Create`;
 
   console.log("student", student);
 
@@ -111,7 +111,7 @@ export async function createStudent(student, selectedCourses) {
 }
 
 export async function deleteStudent(id) {
-  const response = await fetch(`Students/Delete/${id}`, {
+  const response = await fetch(`${BASE_URL}/Students/Delete/${id}`, {
     method: "POST",
   });
   if (!response.ok) {

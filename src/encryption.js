@@ -23,5 +23,5 @@ export const loginWithSessionToken = async () => {
     return false;
   }
   console.log("Logged in via session token");
-  return res.accountId;
+  return res.username;
 };
